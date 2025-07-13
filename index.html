@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>TornAIDS</title>
+  <link href="src/styles.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Torn Assisstive Implements Displaying Strategically">
+  <meta name="keywords" content="Torn, Tools, Space, Pandas">
+  <meta name="author" content="D00dleD">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="https://placehold.co/32x32">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://placehold.co/16x16">
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="logo">
+        <img src="https://placehold.co/40x40" alt="Company logo" class="logo-img">
+        <span class="logo-text">TornAIDS</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#travel">Travel</a></li>
+        <li><a href="#vault" disabled>Vault</a></li>
+      </ul>
+      <button class="mobile-menu-btn">☰</button>
+    </div>
+  </nav>
+
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>TornAIDS</h1>
+      <p>LEGO is Danish. Hurts up Bum.</p>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Flowers</th>
+              <th>Plushies</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="tf">0</td>
+              <td class="tp">0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <a href="#total" class="btn">Total Trade</a>
+      <a href="#flowers" class="btn">Flowers</a>
+      <a href="#plushies" class="btn">Plushies</a>
+      <a href="#vault" class="btn">Vault</a>
+    </div>
+  </section>
+
+  <!--Total trade -->
+  <section class="hero" id="travel">
+    <div class="hero-content">
+      <h1>Travel Storage</h1>
+      <p>A summary of what you have stored in display case.</p>
+      <div class="filter-container">
+        <h2>Filter Items</h2>
+        <div class="filter-options">
+          <div class="filter-group">
+            <h3>Categories</h3>
+            <div class="filter-item">
+              <input type="checkbox" id="flowers" name="flowers" value="Flower" checked>
+              <label for="flowers">Flowers</label>
+            </div>
+            <div class="filter-item">
+              <input type="checkbox" id="plushies" name="plushies" value="Plushie" checked>
+              <label for="plushies">Plushies</label>
+            </div>
+            <div class="filter-item">
+              <input type="checkbox" id="drugs" name="drugs" value="Drug" checked>
+              <label for="drugs">Drugs & Temps</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Image</th>
+              <th>Location</th>
+              <th>Adam</th>
+              <th>Ryan</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody id="itemsContainer">
+
+          </tbody>
+        </table>
+      </div>
+      <a href="#home" class="btn">To Top</a>
+    </div>
+  </section>
+
+  <!--Vault -->
+  <section class="hero" id="vault">
+    <div class="hero-content">
+      <h1>Vault</h1>
+      <p>Description.</p>
+      <a href="#home" class="btn">To Top</a>
+    </div>
+  </section>
+
+  <!--Fin-->
+  <footer>
+    <p>&copy; 2023 BrandName. All rights reserved.</p>
+  </footer>
+  <script>
+    // Mobile menu toggle
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('.nav-links li a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+      });
+    });
+  </script>
+  <script src="./index.js"></script>
+</body>
+
+</html>
