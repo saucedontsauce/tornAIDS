@@ -14,14 +14,14 @@ const stateManager = async () => {
     //console.log("--STATE-MANAGER--");
     myKey = await loadMyKey();
     myData = await loadMyData();
-    if (myKey && !myData) {
+    if (myKey && !myData || myData.timestamp <= Math.floor(Date.now() / 1000) - 900) {
         try {
-            const data = await fetchJSON(`https://api.torn.com/user/?selections=profile,display,timestamps&key=${myKey}&comment=tornAIDS`);
+            const data = await fetchJSON(`https://api.torn.com/user/?selections=profile,display,timestamp&key=${myKey}&comment=tornAIDS`);
             setMyData(data);
             myData = data; // Update local myData after setting
             console.log(myData);
             if (myData?.married?.spouse_id) { // spouse detected
-                const spousedataFetched = await fetchJSON(`https://api.torn.com/user/${myData.married.spouse_id}?selections=profile,display,timestamps&key=${myKey}&comment=tornAIDS`);
+                const spousedataFetched = await fetchJSON(`https://api.torn.com/user/${myData.married.spouse_id}?selections=profile,display,timestamp&key=${myKey}&comment=tornAIDS`);
                 console.log(spousedataFetched);
                 setSpouseData(spousedataFetched);
                 spouseData = spousedataFetched; // Update local spouseData after setting
@@ -31,16 +31,13 @@ const stateManager = async () => {
         }
     } else if (myData) {
         spouseData = loadSpouseData();
-        if (myData.timestamp) {
-            console.log(myData.timestamp)
-        }
         mergedDisplay = await mergeDisplays();
         spouseShown = await checkSpouseShown();
         emptyFilter = await checkEmptyFilter();
         typeFilter = await checktypeFilter();
     };
 
-    if (!items) {
+    if (myKey && !items) {
         items = await loadItems();
     }
 

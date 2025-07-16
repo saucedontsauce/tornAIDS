@@ -104,7 +104,6 @@ function renderShell() {
 };
 
 function renderDisplayCase() {
-    console.log('--RENDER-DISPLAY--');
     const itemdisplay = document.getElementById("itemsContainer");
     const displayhead = document.getElementById("display-head");
     let displayspouseheader = document.getElementById("display-spouse-head");
@@ -166,7 +165,6 @@ function renderDisplayCase() {
             }
         }
     }
-    console.log('filtered items', filteredItems)
     if (spouseShown === 'true') { // Compare with string 'true'
         if (!displayspouseheader) {
             displayspouseheader = document.createElement("th");

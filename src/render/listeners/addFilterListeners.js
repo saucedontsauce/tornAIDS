@@ -33,7 +33,6 @@ export default async function addFilterListeners() {
 
 
     if (emptyBox) {
-        console.log(emptyFilter);
         if (emptyFilter) {
             emptyBox.checked = emptyFilter
 
