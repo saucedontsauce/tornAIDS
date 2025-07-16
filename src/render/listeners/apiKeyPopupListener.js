@@ -9,7 +9,7 @@ export default async function addApiInputListeners() {
         document.getElementById('apikeyfield').addEventListener("submit", (e) => {
             e.preventDefault();
             setMyKey(document.getElementById('apikey').value);
-            divMap.apiKeyField.remove();
+            document.getElementById('apikeyfield').remove();
         });
 
 

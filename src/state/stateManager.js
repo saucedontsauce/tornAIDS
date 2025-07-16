@@ -45,7 +45,7 @@ const stateManager = async () => {
 }
 ////          key state
 const setMyKey = (value) => {
-    const key = localStorage.setItem("my_key", value);
+    localStorage.setItem("my_key", value);
     myKey = value
 };
 const loadMyKey = () => {
