@@ -111,7 +111,7 @@ const checktypeFilter = () => {
     return localStorage.getItem('type_filter')
 }
 
-const setItems = () => {
+const setItems = (value) => {
     localStorage.setItem("items", JSON.stringify(value));
     items = value;
 };
