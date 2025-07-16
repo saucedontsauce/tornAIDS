@@ -1,0 +1,137 @@
+
+import { fetchJSON } from "../util/util.js";
+import { pages, navContent } from "./pages.js";
+var myKey;
+var myData;
+var spouseData;
+var mergedDisplay;
+var spouseShown;
+var typeFilter;
+var emptyFilter;
+var items;
+//      functions
+const stateManager = async () => {
+    //console.log("--STATE-MANAGER--");
+    myKey = await loadMyKey();
+    myData = await loadMyData();
+    if (myKey && !myData) {
+        try {
+            const data = await fetchJSON(`https://api.torn.com/user/?selections=profile,display,timestamps&key=${myKey}&comment=tornAIDS`);
+            setMyData(data);
+            myData = data; // Update local myData after setting
+            console.log(myData);
+            if (myData?.married?.spouse_id) { // spouse detected
+                const spousedataFetched = await fetchJSON(`https://api.torn.com/user/${myData.married.spouse_id}?selections=profile,display,timestamps&key=${myKey}&comment=tornAIDS`);
+                console.log(spousedataFetched);
+                setSpouseData(spousedataFetched);
+                spouseData = spousedataFetched; // Update local spouseData after setting
+            }
+        } catch (error) {
+            console.error("Error fetching user data:", error);
+        }
+    } else if (myData) {
+        spouseData = loadSpouseData();
+        if (myData.timestamp) {
+            console.log(myData.timestamp)
+        }
+    };
+
+    if (!items) {
+        items = await loadItems();
+    }
+
+    mergedDisplay = await mergeDisplays();
+    spouseShown = await checkSpouseShown();
+    emptyFilter = await checkEmptyFilter();
+    typeFilter = await checktypeFilter();
+}
+////          key state
+const setMyKey = async (value) => {
+    const key = localStorage.setItem("my_key", value);
+    myKey = value
+};
+const loadMyKey = () => {
+    const key = localStorage.getItem("my_key");
+    return key;
+}
+////          myData 
+const setMyData = (value) => {
+    localStorage.setItem("my_data", JSON.stringify(value));
+    myData = value;
+};
+const loadMyData = () => {
+    const data = localStorage.getItem('my_data');
+    return data ? JSON.parse(data) : null;
+};
+////          spouseData 
+const setSpouseData = (value) => {
+    localStorage.setItem("spouse_data", JSON.stringify(value));
+    spouseData = value;
+};
+const loadSpouseData = () => {
+    const data = localStorage.getItem('spouse_data');
+    return data ? JSON.parse(data) : null;
+};
+////          merge displays
+const mergeDisplays = () => {
+    var merged = {};
+    for (const key in myData.display) {
+        merged[myData.display[key].ID] = { ...myData.display[key] }
+    }
+    for (const key in spouseData.display) {
+        if (merged[spouseData.display[key].ID]) {
+            merged[spouseData.display[key].ID].quantity += spouseData.display[key].quantity
+        } else {
+            merged[spouseData.display[key].ID] = spouseData.display[key]
+        }
+    }
+    return merged;
+};
+////          item state
+const loadItems = async () => {
+    try {
+        const response = await fetch('./src/state/items.json');
+        const data = await response.json();
+        return data
+    } catch (error) {
+        console.error("Error loading items.json:", error);
+        return {}
+    }
+};
+////             shouse shown
+const checkSpouseShown = () => {
+    return localStorage.getItem("spouse_shown");
+};
+const setSpouseShown = async (value) => {
+    localStorage.setItem("spouse_shown", value);
+    spouseShown = value;
+}
+
+const setEmptyFilter = (value) => {
+    localStorage.setItem("empty_filter", value)
+    emptyFilter = value
+}
+const setTypeFilter = (value) => {
+    localStorage.setItem('type_filter', value);
+    typeFilter = value
+}
+const checkEmptyFilter = () => {
+    return localStorage.getItem('empty_filter');
+}
+const checktypeFilter = () => {
+    return localStorage.getItem('type_filter')
+}
+
+
+// export
+export {
+    stateManager,
+    myKey, setMyKey,
+    myData, setMyData,
+    spouseData, setSpouseData,
+    mergedDisplay, items,
+    spouseShown, setSpouseShown,
+    pages, navContent,
+    typeFilter, emptyFilter,
+    setTypeFilter, setEmptyFilter
+}
