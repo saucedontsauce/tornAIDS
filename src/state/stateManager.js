@@ -32,6 +32,12 @@ const stateManager = async () => {
                 setSpouseData(spousedataFetched);
                 spouseData = spousedataFetched; // Update local spouseData after setting
             }
+            mergedDisplay = await mergeDisplays();
+            spouseShown = await checkSpouseShown();
+            emptyFilter = await checkEmptyFilter();
+            typeFilter = await checktypeFilter();
+            !items && (items = getItems())
+
         } catch (error) {
             console.error("Error fetching user data:", error);
         }
