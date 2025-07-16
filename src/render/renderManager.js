@@ -190,9 +190,9 @@ function renderDisplayCase() {
     for (const key in filteredItems) {
         if (filteredItems.hasOwnProperty(key)) {
             const item = filteredItems[key];
-            const myQuantity = myDisplayData[key]?.quantity || 0;
-            const spouseQuantity = spouseDisplayData[key]?.quantity || 0;
-            const mergedQuantity = mergedDisplay[key]?.quantity || 0; // Use mergedDisplay
+            const myQuantity = myDisplayData ? [key]?.quantity || 0;
+            const spouseQuantity = spouseDisplayData ? [key]?.quantity || 0;
+            const mergedQuantity = mergedDisplay ? [key]?.quantity || 0; // Use mergedDisplay
             const row = document.createElement('tr');
             let rowHtml = `
                 <td class="item-name">${item.name}</td>
