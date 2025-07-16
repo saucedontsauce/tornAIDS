@@ -34,16 +34,17 @@ const stateManager = async () => {
         if (myData.timestamp) {
             console.log(myData.timestamp)
         }
+        mergedDisplay = await mergeDisplays();
+        spouseShown = await checkSpouseShown();
+        emptyFilter = await checkEmptyFilter();
+        typeFilter = await checktypeFilter();
     };
 
     if (!items) {
         items = await loadItems();
     }
 
-    mergedDisplay = await mergeDisplays();
-    spouseShown = await checkSpouseShown();
-    emptyFilter = await checkEmptyFilter();
-    typeFilter = await checktypeFilter();
+
 }
 ////          key state
 const setMyKey = async (value) => {
