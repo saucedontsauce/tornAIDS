@@ -6,11 +6,11 @@ export default async function addApiInputListeners() {
             document.getElementById('apikeyfield').remove();
         }
     } else {
-        document.getElementById('apikeyfield').addEventListener("submit", (e) => {
+        document.getElementById('apikeyfield').addEventListener("submit", async (e) => {
             e.preventDefault();
             setMyKey(document.getElementById('apikey').value);
             document.getElementById('apikeyfield').remove();
-            stateManager()
+            await stateManager()
             renderDisplayCase();
         });
 
