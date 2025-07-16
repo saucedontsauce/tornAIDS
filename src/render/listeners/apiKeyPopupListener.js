@@ -1,5 +1,5 @@
-import { divMap } from "../../util/util.js";
-import { myKey, setMyKey } from "../../state/stateManager.js";
+import { myKey, setMyKey, stateManager } from "../../state/stateManager.js";
+import { renderDisplayCase } from "../renderManager.js";
 export default async function addApiInputListeners() {
     if (myKey) {
         if (document.getElementById('apikeyfield')) {
@@ -10,6 +10,8 @@ export default async function addApiInputListeners() {
             e.preventDefault();
             setMyKey(document.getElementById('apikey').value);
             document.getElementById('apikeyfield').remove();
+            stateManager()
+            renderDisplayCase();
         });
 
 
