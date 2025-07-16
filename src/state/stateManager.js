@@ -25,6 +25,8 @@ const stateManager = async () => {
             const data = await fetchJSON(`https://api.torn.com/user/?selections=profile,display,timestamp&key=${myKey}&comment=tornAIDS`);
             setMyData(data);
             myData = data; // Update local myData after setting
+            if (document.getElementById('logo-icon')) { document.getElementById('logo-icon').href = myData.profile_image };
+            if (document.getElementById('nav-title')) { document.getElementById('nav-title').textContent = myData.name };
             console.log(myData);
             if (myData?.married?.spouse_id) { // spouse detected
                 const spousedataFetched = await fetchJSON(`https://api.torn.com/user/${myData.married.spouse_id}?selections=profile,display,timestamp&key=${myKey}&comment=tornAIDS`);

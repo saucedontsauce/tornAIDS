@@ -192,7 +192,6 @@ function renderDisplayCase() {
             const item = filteredItems[key];
             const myQuantity = myDisplayData[key] && myDisplayData[key]?.quantity || 0;
             const spouseQuantity = spouseDisplayData[key] && spouseDisplayData[key]?.quantity || 0;
-            console.log(mergedDisplay)
             const mergedQuantity = mergedDisplay[key] && mergedDisplay[key]?.quantity || 0; // Use mergedDisplay
             const row = document.createElement('tr');
             let rowHtml = `
