@@ -16,7 +16,9 @@ const stateManager = async () => {
     myData = await loadMyData();
     if (myKey && !items) {
         items = await loadItems();
-    };
+
+    }
+
     if (myKey && !myData || myData?.timestamp <= Math.floor(Date.now() / 1000) - 900) {
         try {
             const data = await fetchJSON(`https://api.torn.com/user/?selections=profile,display,timestamp&key=${myKey}&comment=tornAIDS`);
