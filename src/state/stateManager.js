@@ -18,7 +18,9 @@ const stateManager = async () => {
     if (myKey && !myData || myData?.timestamp <= Math.floor(Date.now() / 1000) - 900) {
         try {
             if (!items) {
-                items = await loadItems();
+                const response = await fetchJSON('./src/state/items.json');
+                setItems(response)
+                items = response;
             }
             const data = await fetchJSON(`https://api.torn.com/user/?selections=profile,display,timestamp&key=${myKey}&comment=tornAIDS`);
             setMyData(data);
@@ -34,6 +36,7 @@ const stateManager = async () => {
             console.error("Error fetching user data:", error);
         }
     } else if (myData) {
+        items = getItems()
         spouseData = loadSpouseData();
         mergedDisplay = await mergeDisplays();
         spouseShown = await checkSpouseShown();
@@ -83,16 +86,7 @@ const mergeDisplays = () => {
     }
     return merged;
 };
-////          item state
-const loadItems = async () => {
-    try {
-        const response = await fetch('./src/state/items.json');
-        const data = await response.json();
-        return data
-    } catch (error) {
-        console.error("Error loading items.json:", error);
-    }
-};
+
 ////             shouse shown
 const checkSpouseShown = () => {
     return localStorage.getItem("spouse_shown");
@@ -117,7 +111,14 @@ const checktypeFilter = () => {
     return localStorage.getItem('type_filter')
 }
 
-
+const setItems = () => {
+    localStorage.setItem("items", JSON.stringify(value));
+    items = value;
+};
+const getItems = () => {
+    const data = localStorage.getItem('items');
+    return data ? JSON.parse(data) : null;
+}
 // export
 export {
     stateManager,
