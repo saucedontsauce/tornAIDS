@@ -8,7 +8,7 @@ export default async function addApiInputListeners() {
     } else {
         document.getElementById('apikeyfield').addEventListener("submit", (e) => {
             e.preventDefault();
-            state.mykey = divMap.apiKeyInput.value;
+            state.mykey = document.getElementById('apikey').value;
             divMap.apiKeyField.remove();
         });
 
@@ -16,39 +16,39 @@ export default async function addApiInputListeners() {
 
 
         // Actual path to your API key page
-        divMap.apiKeyLink.href = "https://www.torn.com/preferences.php#tab=api?step=addNewKey&title=TornAIDS&type=3";
+        document.getElementById('apiKeyLink').href = "https://www.torn.com/preferences.php#tab=api?step=addNewKey&title=TornAIDS&type=3";
 
         // Set up hover/touch events
         if (window.matchMedia('(hover: hover)').matches) {
             // Desktop with hover support
-            divMap.apiNotification.addEventListener('mouseenter', showPopup);
-            divMap.apiNotification.addEventListener('mouseleave', hidePopup);
+            document.getElementById('apiNotification').addEventListener('mouseenter', showPopup);
+            document.getElementById('apiNotification').addEventListener('mouseleave', hidePopup);
         } else {
             // Mobile devices (tap to show)
-            divMap.apiNotification.addEventListener('click', function (e) {
+            document.getElementById('apiNotification').addEventListener('click', function (e) {
                 e.preventDefault();
                 togglePopup();
             });
         }
 
         // Close button click
-        divMap.closeApiPopup.addEventListener('click', function (e) {
+        document.getElementById('closePopup').addEventListener('click', function (e) {
             e.stopPropagation();
             hidePopup();
         });
 
         async function showPopup() {
-            divMap.apiNotificationPopup.classList.add('visible');
-            divMap.notificationBadgeCount.style.backgroundColor = '#6366f1'; // Slightly lighter when active
+            document.getElementById('notificationPopup').classList.add('visible');
+            document.getElementById('badgeCount').style.backgroundColor = '#6366f1'; // Slightly lighter when active
         }
 
         async function hidePopup() {
-            divMap.apiNotificationPopup.classList.remove('visible');
-            divMap.notificationBadgeCount.style.backgroundColor = '#4f46e5'; // Original color
+            document.getElementById('notificationPopup').classList.remove('visible');
+            document.getElementById('badgeCount').style.backgroundColor = '#4f46e5'; // Original color
         }
 
         async function togglePopup() {
-            if (divMap.apiNotificationPopup.classList.contains('visible')) {
+            if (document.getElementById('notificationPopup').classList.contains('visible')) {
                 hidePopup();
             } else {
                 showPopup();
@@ -57,7 +57,7 @@ export default async function addApiInputListeners() {
 
         // Close when clicking outside on mobile
         document.addEventListener('click', function (e) {
-            if (!divMap.apiNotification.contains(e.target) && divMap.apiNotificationPopup.classList.contains('visible')) {
+            if (!document.getElementById('notificationPopup').contains(e.target) && document.getElementById('notificationPopup').classList.contains('visible')) {
                 hidePopup();
             }
         });
