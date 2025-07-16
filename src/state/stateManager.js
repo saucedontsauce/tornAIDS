@@ -14,6 +14,9 @@ const stateManager = async () => {
     //console.log("--STATE-MANAGER--");
     myKey = await loadMyKey();
     myData = await loadMyData();
+    if (myKey && !items) {
+        items = await loadItems();
+    };
     if (myKey && !myData || myData?.timestamp <= Math.floor(Date.now() / 1000) - 900) {
         try {
             const data = await fetchJSON(`https://api.torn.com/user/?selections=profile,display,timestamp&key=${myKey}&comment=tornAIDS`);
@@ -36,12 +39,6 @@ const stateManager = async () => {
         emptyFilter = await checkEmptyFilter();
         typeFilter = await checktypeFilter();
     };
-
-    if (myKey && !items) {
-        items = await loadItems();
-    }
-
-
 }
 ////          key state
 const setMyKey = (value) => {
