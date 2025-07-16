@@ -14,13 +14,12 @@ const stateManager = async () => {
     //console.log("--STATE-MANAGER--");
     myKey = await loadMyKey();
     myData = await loadMyData();
-    if (myKey && !items) {
-        items = await loadItems();
-
-    }
 
     if (myKey && !myData || myData?.timestamp <= Math.floor(Date.now() / 1000) - 900) {
         try {
+            if (!items) {
+                items = await loadItems();
+            }
             const data = await fetchJSON(`https://api.torn.com/user/?selections=profile,display,timestamp&key=${myKey}&comment=tornAIDS`);
             setMyData(data);
             myData = data; // Update local myData after setting
@@ -92,7 +91,6 @@ const loadItems = async () => {
         return data
     } catch (error) {
         console.error("Error loading items.json:", error);
-        return {}
     }
 };
 ////             shouse shown
