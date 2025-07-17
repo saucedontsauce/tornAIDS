@@ -15,7 +15,7 @@ const stateManager = async () => {
     myKey = await loadMyKey();
     myData = await loadMyData();
 
-    if (myKey && !myData || myData?.timestamp <= Math.floor(Date.now() / 1000) - 900) {
+    if (myKey && !myData || myData?.timestamp <= (Math.floor(Date.now() / 1000) - 900)) {
         try {
             if (!items) {
                 const response = await fetchJSON('./src/state/items.json');
