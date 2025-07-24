@@ -2,6 +2,7 @@ import { divMap } from "../../util/util.js";
 
 const navListeners = async function () {
     // Toggle
+
     document.querySelector('.mobile-menu-btn').addEventListener('click', () => {
         divMap.navLinks.classList.toggle('active');
     });

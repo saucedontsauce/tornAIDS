@@ -13,6 +13,13 @@
     transform: scale(1.1);
 }
 
+#submitkey {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+}
+
 .badge-count {
     position: absolute;
     top: -8px;

@@ -6,6 +6,13 @@ export default async function addApiInputListeners() {
             document.getElementById('apikeyfield').remove();
         }
     } else {
+        document.getElementById("submitkey").addEventListener("click", async (e) => {
+            e.preventDefault();
+            setMyKey(document.getElementById('apikey').value);
+            document.getElementById('apikeyfield').remove();
+            await stateManager()
+            renderDisplayCase();
+        });
         document.getElementById('apikeyfield').addEventListener("submit", async (e) => {
             e.preventDefault();
             setMyKey(document.getElementById('apikey').value);
@@ -61,9 +68,12 @@ export default async function addApiInputListeners() {
 
         // Close when clicking outside on mobile
         document.addEventListener('click', function (e) {
-            if (!document.getElementById('notificationPopup').contains(e.target) && document.getElementById('notificationPopup').classList.contains('visible')) {
-                hidePopup();
+            if (document.getElementById('notificationPopup')) {
+                if (!document.getElementById('notificationPopup').contains(e.target) && document.getElementById('notificationPopup').classList.contains('visible')) {
+                    hidePopup();
+                }
             }
+
         });
     };
 };

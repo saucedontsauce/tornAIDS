@@ -132,22 +132,23 @@ const navContent = `
                         <span class="logo-text"  id="nav-title">TornAIDS</span>
 
                         <form class="api-key-field" id="apikeyfield">
-                            <input type="text" name="apikey" id="apikey" placeholder="API key">
-                                <div class="notification-badge" id="apiNotification">
-                                    <button class="text-gray-700 hover:text-gray-900 px-3 py-2 relative">
-                                        <span class="badge-count" id="badgeCount">?</span>
-                                    </button>
-
-                                    <div class="notification-popup" id="notificationPopup">
-                                        <button class="close-btn" id="closePopup">✕</button>
-                                        <div class="popup-title">API Key</div>
-                                        <div class="popup-message">
-                                            To use our Tool, you'll need an API key. Click below to get your key from Torn.
-                                            Your API key will only be stored on your device unless consent is given.
-                                        </div>
-                                        <a href="#" target="_blank" class="popup-link" id="apiKeyLink">Get API Key →</a>
+                            <input type="text" name="apikey" id="apikey" placeholder="API key"/>
+                            <button class="btn py-0" id="submitkey">+</button>
+                            <div class="notification-badge" id="apiNotification">
+                                <button type="button" class="text-gray-700 hover:text-gray-900 px-3 py-2 relative">
+                                    <span class="badge-count" id="badgeCount">?</span>
+                                </button>
+                                <div class="notification-popup" id="notificationPopup">
+                                    <button type="button" class="close-btn" id="closePopup">✕</button>
+                                    <div class="popup-title">API Key</div>
+                                    <div class="popup-message">
+                                        To use our Tool, you'll need an API key. Click below to get your key from Torn.
+                                        Your API key will only be stored on your device unless consent is given.
                                     </div>
+                                    <a href="#" target="_blank" class="popup-link" id="apiKeyLink">Get API Key →</a>                                    </div>
                                 </div>
+                            </div>
+                            
                         </form>
                 </div>
 
