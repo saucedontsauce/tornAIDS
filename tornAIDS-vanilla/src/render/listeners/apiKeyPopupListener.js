@@ -20,6 +20,8 @@ export default async function addApiInputListeners() {
         // Actual path to your API key page
         document.getElementById('apiKeyLink').href = "https://www.torn.com/preferences.php#tab=api?step=addNewKey&title=TornAIDS&type=3";
 
+
+
         // Set up hover/touch events
         if (window.matchMedia('(hover: hover)').matches) {
             // Desktop with hover support
